@@ -11,7 +11,9 @@ import {
   Sunrise,
   Bell,
   Package,
-  ShoppingCart
+  ShoppingCart,
+  Users,
+  MessagesSquare
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -89,6 +91,18 @@ export const Sidebar: React.FC = () => {
           label="Settings" 
           collapsed={collapsed}
         />
+        <NavLinkItem 
+  to="/team" 
+  icon={<Users size={20} />} 
+  label="Team" 
+  collapsed={collapsed}
+/>
+<NavLinkItem 
+  to="/chat" 
+  icon={<MessagesSquare size={20} />} 
+  label="Chat" 
+  collapsed={collapsed}
+/>
       </nav>
     </aside>
   );

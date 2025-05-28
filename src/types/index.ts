@@ -29,6 +29,50 @@ export type VideoContent = {
   status: 'published' | 'draft' | 'archived';
   views: number;
 };
+export type TeamMember = {
+  id: string;
+  name: string;
+  email: string;
+  role: 'team-member';
+  department: string;
+  avatar: string;
+  status: 'active' | 'inactive';
+  performanceMetrics: {
+    totalChats: number;
+    resolvedChats: number;
+    averageResponseTime: number; // in seconds
+    customerSatisfaction: number; // 1-5 scale
+  };
+  assignedChats: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ChatConversation = {
+  id: string;
+  customerId: string;
+  customerName: string;
+  assignedTo?: string;
+  status: 'active' | 'pending' | 'resolved';
+  lastMessage?: string;
+  lastMessageTime?: string;
+  unreadCount: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ChatMessage = {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  senderType: 'customer' | 'team-member';
+  message: string;
+  createdAt: string;
+  read: boolean;
+};
+
+
+
 
 export type DietPlan = {
   id: string;

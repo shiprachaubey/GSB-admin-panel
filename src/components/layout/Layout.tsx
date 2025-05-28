@@ -16,6 +16,8 @@ import { Products } from '../pages/Products';
 import { ProductUpload } from '../pages/ProductUpload';
 import { Orders } from '../pages/Orders';
 import { Login } from '../pages/Login';
+import { TeamManagement } from '../pages/TeamManagement';
+import { Chat } from '../pages/Chat';
 
 export const Layout: React.FC = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -48,6 +50,8 @@ export const Layout: React.FC = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/add" element={<ProductUpload />} />
+            <Route path="/team" element={<TeamManagement />} />
+<Route path="/chat" element={<Chat />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
