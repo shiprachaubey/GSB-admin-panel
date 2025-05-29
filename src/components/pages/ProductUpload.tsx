@@ -10,12 +10,12 @@ export const ProductUpload: React.FC = () => {
   const [discountedPrice, setDiscountedPrice] = useState('');
   const [category, setCategory] = useState('ayurvedic');
   const [stock, setStock] = useState('');
-  const [sku, setSku] = useState('');
-  const [manufacturer, setManufacturer] = useState('');
+  //const [sku, setSku] = useState('');
+  //const [manufacturer, setManufacturer] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [benefits, setBenefits] = useState('');
-  const [dosage, setDosage] = useState('');
-  const [sideEffects, setSideEffects] = useState('');
+  // const [dosage, setDosage] = useState('');
+ // const [sideEffects, setSideEffects] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
@@ -52,12 +52,12 @@ export const ProductUpload: React.FC = () => {
     setDiscountedPrice('');
     setCategory('ayurvedic');
     setStock('');
-    setSku('');
-    setManufacturer('');
+    //setSku('');
+   // setManufacturer('');
     setIngredients('');
     setBenefits('');
-    setDosage('');
-    setSideEffects('');
+    //setDosage('');
+    //setSideEffects('');
     setImageFile(null);
     setImagePreview('');
     setUploadStatus('idle');
@@ -193,35 +193,7 @@ export const ProductUpload: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="sku" className="block text-sm font-medium text-gray-700 mb-1">
-                        SKU <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="sku"
-                        value={sku}
-                        onChange={(e) => setSku(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="manufacturer" className="block text-sm font-medium text-gray-700 mb-1">
-                        Manufacturer <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="manufacturer"
-                        value={manufacturer}
-                        onChange={(e) => setManufacturer(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                        required
-                      />
-                    </div>
-                  </div>
+              
                 </div>
 
                 <div className="space-y-6">
@@ -305,33 +277,8 @@ export const ProductUpload: React.FC = () => {
                     />
                   </div>
 
-                  <div>
-                    <label htmlFor="dosage" className="block text-sm font-medium text-gray-700 mb-1">
-                      Dosage <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      id="dosage"
-                      value={dosage}
-                      onChange={(e) => setDosage(e.target.value)}
-                      rows={2}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                      required
-                    />
-                  </div>
+                 
 
-                  <div>
-                    <label htmlFor="sideEffects" className="block text-sm font-medium text-gray-700 mb-1">
-                      Side Effects
-                    </label>
-                    <textarea
-                      id="sideEffects"
-                      value={sideEffects}
-                      onChange={(e) => setSideEffects(e.target.value)}
-                      rows={2}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                      placeholder="List any known side effects"
-                    />
-                  </div>
                 </div>
               </div>
             </div>

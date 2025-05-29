@@ -7,8 +7,8 @@ export const VideoUpload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState<ContentCategory>('meditation');
-  const [access, setAccess] = useState<VideoAccess>('free');
+  const [category, setCategory] = useState<ContentCategory>('Meditation');
+  const [access, setAccess] = useState<VideoAccess>('Free');
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>('');
@@ -37,42 +37,88 @@ export const VideoUpload: React.FC = () => {
     }
   };
   
-  const handleUpload = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleUpload = async (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    if (!videoFile) {
-      alert('Please select a video file');
-      return;
-    }
+  //   if (!videoFile) {
+  //     alert('Please select a video file');
+  //     return;
+  //   }
     
+  //   setUploadStatus('uploading');
+    
+  //   // Simulate upload progress
+  //   const interval = setInterval(() => {
+  //     setUploadProgress(prev => {
+  //       if (prev >= 100) {
+  //         clearInterval(interval);
+  //         setUploadStatus('success');
+  //         return 100;
+  //       }
+  //       return prev + 5;
+  //     });
+  //   }, 300);
+    
+  //   // In a real app, you would upload the file to a server here
+  //   // For this demo, we'll just simulate a successful upload after a delay
+  //   setTimeout(() => {
+  //     clearInterval(interval);
+  //     setUploadProgress(100);
+  //     setUploadStatus('success');
+  //   }, 6000);
+  // };
+  
+
+const handleUpload = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!videoFile || !thumbnailFile || !title || !description) {
+    alert('Please fill in all required fields and select both files.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('category', category);
+  formData.append('accessLevel', access);
+  formData.append('video', videoFile);
+  formData.append('thumbnail', thumbnailFile);
+
+  try {
     setUploadStatus('uploading');
-    
-    // Simulate upload progress
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setUploadStatus('success');
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 300);
-    
-    // In a real app, you would upload the file to a server here
-    // For this demo, we'll just simulate a successful upload after a delay
-    setTimeout(() => {
-      clearInterval(interval);
+
+    const response = await fetch('http://localhost:9000/api/videos/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    console.log('Upload response:', result);
+
+    if (response.ok) {
       setUploadProgress(100);
       setUploadStatus('success');
-    }, 6000);
-  };
-  
+    } else {
+      setUploadStatus('error');
+      alert(`Upload failed: ${result.message || 'Unknown error'}`);
+    }
+  } catch (error) {
+  console.error('Upload error:', error);
+  setUploadStatus('error');
+  alert('Upload failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
+}
+
+};
+
+
+
+
   const resetForm = () => {
     setTitle('');
     setDescription('');
-    setCategory('meditation');
-    setAccess('free');
+    setCategory('Meditation');
+    setAccess('Free');
     setVideoFile(null);
     setThumbnailFile(null);
     setThumbnailPreview('');
@@ -163,10 +209,10 @@ export const VideoUpload: React.FC = () => {
                         className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                         required
                       >
-                        <option value="meditation">Meditation</option>
-                        <option value="education">Education</option>
-                        <option value="success-stories">Success Stories</option>
-                        <option value="fitness">Fitness</option>
+                        <option value="Meditation">Meditation</option>
+                        <option value="Education">Education</option>
+                        <option value="Success-Stories">Success Stories</option>
+                        <option value="Fitness">Fitness</option>
                       </select>
                     </div>
                     
@@ -181,8 +227,8 @@ export const VideoUpload: React.FC = () => {
                         className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                         required
                       >
-                        <option value="free">Free</option>
-                        <option value="paid">Paid</option>
+                        <option value="Free">Free</option>
+                        <option value="Paid">Paid</option>
                       </select>
                     </div>
                   </div>

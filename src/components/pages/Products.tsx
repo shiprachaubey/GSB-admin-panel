@@ -115,8 +115,8 @@ export const Products: React.FC = () => {
                 <option value="all">All Categories</option>
                 <option value="ayurvedic">Ayurvedic</option>
                 <option value="supplements">Supplements</option>
-                <option value="herbs">Herbs</option>
-                <option value="wellness">Wellness</option>
+                {/* <option value="herbs">Herbs</option>
+                <option value="wellness">Wellness</option> */}
               </select>
             </div>
           </div>
@@ -173,71 +173,41 @@ export const Products: React.FC = () => {
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Stock
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
+             
+               
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredProducts.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="h-16 w-16 flex-shrink-0 rounded-md overflow-hidden">
-                        <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{product.name}</div>
-                        <div className="text-sm text-gray-500">SKU: {product.sku}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 py-1 text-xs font-medium rounded-full capitalize bg-gray-100 text-gray-800">
-                      {product.category}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      ₹{product.price.toLocaleString()}
-                    </div>
-                    {product.discountedPrice && (
-                      <div className="text-xs text-green-600">
-                        Sale: ₹{product.discountedPrice.toLocaleString()}
-                      </div>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {product.stock} units
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      product.status === 'in-stock'
-                        ? 'bg-green-100 text-green-800'
-                        : product.status === 'low-stock'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {product.status === 'low-stock' && <AlertTriangle size={12} className="mr-1" />}
-                      {product.status.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center justify-end gap-2">
-                      <Link to={`/products/edit/${product.id}`} className="text-amber-600 hover:text-amber-900">
-                        <Edit size={18} />
-                      </Link>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+         <tbody className="bg-white divide-y divide-gray-200">
+  {filteredProducts.map((product) => (
+    <tr key={product.id} className="hover:bg-gray-50">
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="flex items-center">
+          <div className="h-16 w-16 flex-shrink-0 rounded-md overflow-hidden">
+            <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
+          </div>
+          <div className="ml-4">
+            <div className="text-sm font-medium text-gray-900">{product.name}</div>
+          </div>
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+        {product.category}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+        ₹{product.price.toLocaleString()}
+        {product.discountedPrice && (
+          <div className="text-xs text-green-600">
+            Sale: ₹{product.discountedPrice.toLocaleString()}
+          </div>
+        )}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {product.stock} units
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </div>
 

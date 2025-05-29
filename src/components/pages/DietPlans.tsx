@@ -101,7 +101,7 @@ export const DietPlans: React.FC = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="flex gap-2">
+            {/* <div className="flex gap-2">
               <button 
                 className="inline-flex items-center px-3 py-2 border border-gray-300 bg-white rounded-md hover:bg-gray-50"
                 onClick={() => setShowFilters(!showFilters)}
@@ -115,7 +115,7 @@ export const DietPlans: React.FC = () => {
                 <option>Draft</option>
                 <option>Archived</option>
               </select>
-            </div>
+            </div> */}
           </div>
           
           {showFilters && (
@@ -147,76 +147,42 @@ export const DietPlans: React.FC = () => {
 
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Diet Plan
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date Added
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Downloads
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredDietPlans.map((plan) => (
-                <tr key={plan.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="h-16 w-24 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center">
-                        {plan.thumbnailUrl ? (
-                          <img src={plan.thumbnailUrl} alt={plan.title} className="h-full w-full object-cover" />
-                        ) : (
-                          <File size={24} className="text-gray-400" />
-                        )}
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{plan.title}</div>
-                        <div className="text-sm text-gray-500 line-clamp-1">{plan.description}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(plan.createdAt)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {plan.downloads.toLocaleString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs rounded-md ${
-                      plan.status === 'published' 
-                        ? 'bg-green-100 text-green-800' 
-                        : plan.status === 'draft'
-                        ? 'bg-gray-100 text-gray-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {plan.status.charAt(0).toUpperCase() + plan.status.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center justify-end gap-2">
-                      <button className="p-1 text-indigo-600 hover:text-indigo-900" title="Download">
-                        <Download size={18} />
-                      </button>
-                      <button className="p-1 text-amber-600 hover:text-amber-900" title="Edit">
-                        <Edit size={18} />
-                      </button>
-                      <button className="p-1 text-red-600 hover:text-red-900" title="Delete">
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+           <thead className="bg-gray-50">
+  <tr>
+    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      Diet Plan
+    </th>
+    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      Date Added
+    </th>
+  </tr>
+</thead>
+
+       <tbody className="bg-white divide-y divide-gray-200">
+  {filteredDietPlans.map((plan) => (
+    <tr key={plan.id} className="hover:bg-gray-50">
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="flex items-center">
+          <div className="h-16 w-24 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center">
+            {plan.thumbnailUrl ? (
+              <img src={plan.thumbnailUrl} alt={plan.title} className="h-full w-full object-cover" />
+            ) : (
+              <File size={24} className="text-gray-400" />
+            )}
+          </div>
+          <div className="ml-4">
+            <div className="text-sm font-medium text-gray-900">{plan.title}</div>
+            <div className="text-sm text-gray-500 line-clamp-1">{plan.description}</div>
+          </div>
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {formatDate(plan.createdAt)}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </div>
 
