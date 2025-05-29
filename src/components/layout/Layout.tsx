@@ -39,7 +39,7 @@ export const Layout: React.FC = () => {
         <TopBar />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 md:p-6">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<VideoManagement />} />
             <Route path="/videos" element={<VideoManagement />} />
             <Route path="/videos/upload" element={<VideoUpload />} />
             <Route path="/videos/edit/:id" element={<VideoEdit />} />

@@ -85,12 +85,12 @@ export const Sidebar: React.FC = () => {
           label="Notifications" 
           collapsed={collapsed}
         />
-        <NavLinkItem 
+        {/* <NavLinkItem 
           to="/settings" 
           icon={<Settings size={20} />} 
           label="Settings" 
           collapsed={collapsed}
-        />
+        /> */}
         <NavLinkItem 
   to="/team" 
   icon={<Users size={20} />} 
