@@ -43,12 +43,12 @@ export const Sidebar: React.FC = () => {
       </div>
 
       <nav className="mt-6">
-        <NavLinkItem 
+        {/* <NavLinkItem 
           to="/" 
           icon={<LayoutDashboard size={20} />} 
           label="Dashboard" 
           collapsed={collapsed} 
-        />
+        /> */}
         <NavLinkItem 
           to="/videos" 
           icon={<Video size={20} />} 
