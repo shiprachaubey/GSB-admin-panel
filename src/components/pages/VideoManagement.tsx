@@ -120,7 +120,7 @@ const categoryDisplay: Record<ContentCategory, { name: string, color: string }> 
   'education': { name: 'Education', color: 'bg-blue-100 text-blue-800' },
   'success-stories': { name: 'Success Stories', color: 'bg-green-100 text-green-800' },
   'fitness': { name: 'Fitness', color: 'bg-indigo-100 text-indigo-800' },
-  'diet-plans': { name: 'Diet Plans', color: 'bg-purple-100 text-purple-800' }
+  // 'diet-plans': { name: 'Diet Plans', color: 'bg-purple-100 text-purple-800' }
 };
 
 export const VideoManagement: React.FC = () => {
@@ -231,7 +231,7 @@ export const VideoManagement: React.FC = () => {
 
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            {/* <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Video
@@ -258,71 +258,54 @@ export const VideoManagement: React.FC = () => {
                   Actions
                 </th>
               </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredVideos.map((video) => (
-                <tr key={video.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="h-16 w-24 flex-shrink-0 rounded-md overflow-hidden">
-                        <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover" />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{video.title}</div>
-                        <div className="text-sm text-gray-500 line-clamp-1">{video.description}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs rounded-full ${categoryDisplay[video.category].color}`}>
-                      {categoryDisplay[video.category].name}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs rounded-md ${
-                      video.access === 'free' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      {video.access === 'free' ? 'Free' : 'Paid'}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDuration(video.duration)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(video.createdAt)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {video.views.toLocaleString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs rounded-md ${
-                      video.status === 'published' 
-                        ? 'bg-green-100 text-green-800' 
-                        : video.status === 'draft'
-                        ? 'bg-gray-100 text-gray-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {video.status.charAt(0).toUpperCase() + video.status.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center justify-end gap-2">
-                      <button className="p-1 text-indigo-600 hover:text-indigo-900" title="View">
-                        <Eye size={18} />
-                      </button>
-                      <Link to={`/videos/edit/${video.id}`} className="p-1 text-amber-600 hover:text-amber-900" title="Edit">
-                        <Edit size={18} />
-                      </Link>
-                      <button className="p-1 text-red-600 hover:text-red-900" title="Delete">
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            </thead> */}
+
+            <thead className="bg-gray-50">
+  <tr>
+    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      Video
+    </th>
+    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      Category
+    </th>
+    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      Access
+    </th>
+  </tr>
+</thead>
+
+         <tbody className="bg-white divide-y divide-gray-200">
+  {filteredVideos.map((video) => (
+    <tr key={video.id} className="hover:bg-gray-50">
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="flex items-center">
+          <div className="h-16 w-24 flex-shrink-0 rounded-md overflow-hidden">
+            <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover" />
+          </div>
+          <div className="ml-4">
+            <div className="text-sm font-medium text-gray-900">{video.title}</div>
+            <div className="text-sm text-gray-500 line-clamp-1">{video.description}</div>
+          </div>
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className={`px-2 py-1 text-xs rounded-full ${categoryDisplay[video.category].color}`}>
+          {categoryDisplay[video.category].name}
+        </span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <span className={`px-2 py-1 text-xs rounded-md ${
+          video.access === 'free' 
+            ? 'bg-green-100 text-green-800' 
+            : 'bg-amber-100 text-amber-800'
+        }`}>
+          {video.access === 'free' ? 'Free' : 'Paid'}
+        </span>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </div>
 
