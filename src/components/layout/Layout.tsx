@@ -6,7 +6,8 @@ import { TopBar } from './TopBar';
 import { Dashboard } from '../pages/Dashboard';
 import { VideoManagement } from '../pages/VideoManagement';
 import { DietPlans } from '../pages/DietPlans';
-import { ConsultancyRequests } from '../pages/ConsultancyRequests';
+import Consultancy from '../pages/ConsultancyRequests';;
+
 import { VideoUpload } from '../pages/VideoUpload';
 import { DietPlanUpload } from '../pages/DietPlanUpload';
 import { VideoEdit } from '../pages/VideoEdit';
@@ -45,7 +46,7 @@ export const Layout: React.FC = () => {
             <Route path="/videos/edit/:id" element={<VideoEdit />} />
             <Route path="/diet-plans" element={<DietPlans />} />
             <Route path="/diet-plans/upload" element={<DietPlanUpload />} />
-            <Route path="/consultancy" element={<ConsultancyRequests />} />
+            <Route path="/consultancy" element={<Consultancy />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/products" element={<Products />} />

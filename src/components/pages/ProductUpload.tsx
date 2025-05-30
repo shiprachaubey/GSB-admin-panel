@@ -7,15 +7,10 @@ export const ProductUpload: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [discountedPrice, setDiscountedPrice] = useState('');
-  const [category, setCategory] = useState('ayurvedic');
   const [stock, setStock] = useState('');
-  //const [sku, setSku] = useState('');
-  //const [manufacturer, setManufacturer] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [benefits, setBenefits] = useState('');
-  // const [dosage, setDosage] = useState('');
- // const [sideEffects, setSideEffects] = useState('');
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
@@ -35,22 +30,67 @@ export const ProductUpload: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setUploadStatus('uploading');
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setUploadStatus('uploading');
     
-    // Simulate API call
-    setTimeout(() => {
-      setUploadStatus('success');
-    }, 1500);
-  };
+  //   // Simulate API call
+  //   setTimeout(() => {
+  //     setUploadStatus('success');
+  //   }, 1500);
+  // };
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setUploadStatus('uploading');
+
+  if (!imageFile || !name || !description || !price || !stock) {
+    alert("Please fill in all required fields and upload an image.");
+    setUploadStatus('idle');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('description', description);
+  formData.append('price', price.toString());
+  formData.append('stock', stock.toString());
+  formData.append('image', imageFile); // ✅ Must match `req.file`
+
+  // ✅ Convert arrays to JSON strings
+  formData.append('ingredients', JSON.stringify(ingredients));
+  formData.append('benefits', JSON.stringify(benefits));
+
+  try {
+    const response = await fetch('http://localhost:9000/api/products/products', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const contentType = response.headers.get('content-type') || '';
+
+    const result = contentType.includes('application/json')
+      ? await response.json()
+      : await response.text();
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Product upload failed');
+    }
+
+    console.log('Upload response:', result);
+    setUploadStatus('success');
+  } catch (error: any) {
+    console.error('Upload error:', error);
+    setUploadStatus('error');
+    alert('Product upload failed: ' + (error.message || 'Unknown error'));
+  }
+};
+
 
   const resetForm = () => {
     setName('');
     setDescription('');
     setPrice('');
-    setDiscountedPrice('');
-    setCategory('ayurvedic');
     setStock('');
     //setSku('');
    // setManufacturer('');
@@ -145,7 +185,7 @@ export const ProductUpload: React.FC = () => {
                       />
                     </div>
 
-                    <div>
+                    {/* <div>
                       <label htmlFor="discountedPrice" className="block text-sm font-medium text-gray-700 mb-1">
                         Discounted Price (₹)
                       </label>
@@ -156,11 +196,11 @@ export const ProductUpload: React.FC = () => {
                         onChange={(e) => setDiscountedPrice(e.target.value)}
                         className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                       />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div>
+                    {/* <div>
                       <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
                         Category <span className="text-red-500">*</span>
                       </label>
@@ -176,7 +216,7 @@ export const ProductUpload: React.FC = () => {
                         <option value="herbs">Herbs</option>
                         <option value="wellness">Wellness</option>
                       </select>
-                    </div>
+                    </div> */}
 
                     <div>
                       <label htmlFor="stock" className="block text-sm font-medium text-gray-700 mb-1">

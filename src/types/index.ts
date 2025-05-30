@@ -54,6 +54,7 @@ export type ChatConversation = {
   customerName: string;
   assignedTo?: string;
   status: 'active' | 'pending' | 'resolved';
+
   lastMessage?: string;
   lastMessageTime?: string;
   unreadCount: number;
@@ -69,6 +70,7 @@ export type ChatMessage = {
   message: string;
   createdAt: string;
   read: boolean;
+ 
 };
 
 
