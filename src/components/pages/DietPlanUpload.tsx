@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Upload, X, AlertCircle, CheckCircle, ArrowLeft, FileText } from 'lucide-react';
+import axios from 'axios';
 
 export const DietPlanUpload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -8,6 +9,8 @@ export const DietPlanUpload: React.FC = () => {
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  //const [uploadedData, setUploadedData] = useState<any>(null);
+
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string>('');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -36,37 +39,170 @@ export const DietPlanUpload: React.FC = () => {
     }
   };
   
-  const handleUpload = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleUpload = async (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    if (!pdfFile) {
-      alert('Please select a PDF file');
-      return;
-    }
+  //   if (!pdfFile) {
+  //     alert('Please select a PDF file');
+  //     return;
+  //   }
     
-    setUploadStatus('uploading');
+  //   setUploadStatus('uploading');
     
-    // Simulate upload progress
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setUploadStatus('success');
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 300);
+  //   // Simulate upload progress
+  //   const interval = setInterval(() => {
+  //     setUploadProgress(prev => {
+  //       if (prev >= 100) {
+  //         clearInterval(interval);
+  //         setUploadStatus('success');
+  //         return 100;
+  //       }
+  //       return prev + 10;
+  //     });
+  //   }, 300);
     
-    // In a real app, you would upload the file to a server here
-    // For this demo, we'll just simulate a successful upload after a delay
-    setTimeout(() => {
-      clearInterval(interval);
-      setUploadProgress(100);
-      setUploadStatus('success');
-    }, 3000);
-  };
+  //   // In a real app, you would upload the file to a server here
+  //   // For this demo, we'll just simulate a successful upload after a delay
+  //   setTimeout(() => {
+  //     clearInterval(interval);
+  //     setUploadProgress(100);
+  //     setUploadStatus('success');
+  //   }, 3000);
+  // };
+ 
   
+
+// const handleUpload = async (e: React.FormEvent) => {
+//   e.preventDefault();
+
+//   if (!pdfFile || !thumbnailFile || !title || !description) {
+//     alert('Please fill in all fields and upload both files.');
+//     return;
+//   }
+
+//  const formData = new FormData();
+// formData.append('title', title);
+// formData.append('description', description);
+// formData.append('pdfFile', pdfFile); // ✅ match backend
+// formData.append('thumbnail', thumbnailFile); // ✅ match backend
+
+
+// try {
+//     setUploadStatus('uploading');
+
+//     const response = await fetch('http://localhost:9000/api/dietplans/upload', {
+//       method: 'POST',
+//       body: formData
+//     });
+
+//     const result = await response.json();
+//     console.log('Upload response:', result);
+
+//     if (response.ok) {
+//       setUploadProgress(100);
+//       setUploadStatus('success');
+//     } else {
+//       setUploadStatus('error');
+//       alert(`Upload failed: ${result.message || 'Unknown error'}`);
+//     }
+//   } catch (error) {
+//   console.error('Upload error:', error);
+//   setUploadStatus('error');
+//   alert('Upload failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
+// }
+
+// };
+
+
+// const handleUpload = async (e: React.FormEvent) => {
+//   e.preventDefault();
+
+//   if (!pdfFile || !thumbnailFile || !title || !description) {
+//     alert('Please fill in all fields.');
+//     return;
+//   }
+
+//   const formData = new FormData();
+//   formData.append('title', title);
+//   formData.append('description', description);
+//   formData.append('pdfFile', pdfFile); // ✅ match backend key
+//   formData.append('thumbnail', thumbnailFile); // ✅ match backend key
+
+//   try {
+//     setUploadStatus('uploading');
+//     setUploadProgress(0);
+
+//     const response = await fetch('http://localhost:9000/api/dietplans/upload', {
+//       method: 'POST',
+//       body: formData,
+//     });
+
+//     const contentType = response.headers.get('content-type');
+
+//     if (!response.ok) {
+//       if (contentType && contentType.includes('application/json')) {
+//         const errorData = await response.json();
+//         throw new Error(errorData.message || 'Upload failed');
+//       } else {
+//         const errorText = await response.text();
+//         throw new Error('Unexpected response: ' + errorText);
+//       }
+//     }
+
+//     const result = await response.json();
+//     console.log('Upload response:', result);
+
+//     setUploadProgress(100);
+//     setUploadStatus('success');
+
+//   } catch (error: any) {
+//     console.error('Upload error:', error);
+//     setUploadStatus('error');
+//     alert('Upload failed: ' + error.message);
+//   }
+// };
+
+
+
+const handleUpload = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!pdfFile || !thumbnailFile || !title || !description) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('pdfFile', pdfFile); // MUST MATCH backend key
+  formData.append('thumbnail', thumbnailFile); // MUST MATCH backend key
+
+  try {
+    setUploadStatus('uploading');
+    setUploadProgress(0);
+
+    const response = await axios.post('http://localhost:9000/api/dietplans/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        setUploadProgress(percentCompleted);
+      }
+    });
+
+    if (response.status === 200) {
+      setUploadStatus('success');
+    } else {
+      setUploadStatus('error');
+      alert('Upload failed: ' + response.data.message);
+    }
+  } catch (error) {
+    console.error('Upload error:', error);
+    setUploadStatus('error');
+    alert('Upload failed: ' + (error as any).message);
+  }
+};
+
   const resetForm = () => {
     setTitle('');
     setDescription('');

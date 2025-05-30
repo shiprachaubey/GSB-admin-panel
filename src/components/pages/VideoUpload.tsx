@@ -69,6 +69,7 @@ export const VideoUpload: React.FC = () => {
   // };
   
 
+
 const handleUpload = async (e: React.FormEvent) => {
   e.preventDefault();
 
@@ -110,6 +111,7 @@ const handleUpload = async (e: React.FormEvent) => {
 }
 
 };
+
 
 
 
@@ -211,7 +213,7 @@ const handleUpload = async (e: React.FormEvent) => {
                       >
                         <option value="Meditation">Meditation</option>
                         <option value="Education">Education</option>
-                        <option value="Success-Stories">Success Stories</option>
+                        <option value="Success Stories">Success Stories</option>
                         <option value="Fitness">Fitness</option>
                       </select>
                     </div>
