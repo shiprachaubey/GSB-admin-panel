@@ -37,38 +37,6 @@ export const VideoUpload: React.FC = () => {
     }
   };
   
-  // const handleUpload = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-    
-  //   if (!videoFile) {
-  //     alert('Please select a video file');
-  //     return;
-  //   }
-    
-  //   setUploadStatus('uploading');
-    
-  //   // Simulate upload progress
-  //   const interval = setInterval(() => {
-  //     setUploadProgress(prev => {
-  //       if (prev >= 100) {
-  //         clearInterval(interval);
-  //         setUploadStatus('success');
-  //         return 100;
-  //       }
-  //       return prev + 5;
-  //     });
-  //   }, 300);
-    
-  //   // In a real app, you would upload the file to a server here
-  //   // For this demo, we'll just simulate a successful upload after a delay
-  //   setTimeout(() => {
-  //     clearInterval(interval);
-  //     setUploadProgress(100);
-  //     setUploadStatus('success');
-  //   }, 6000);
-  // };
-  
-
 
 const handleUpload = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -89,7 +57,7 @@ const handleUpload = async (e: React.FormEvent) => {
   try {
     setUploadStatus('uploading');
 
-    const response = await fetch('http://localhost:9000/api/videos/upload', {
+    const response = await fetch('http://13.60.227.51:9000/api/videos/upload', {
       method: 'POST',
       body: formData
     });

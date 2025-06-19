@@ -358,17 +358,17 @@
 //   const [newMember, setNewMember] = useState({ fullName: '', email: '', department: 'Customer Support' });
 
   // const getAllTeamMembers = async () => {
-  //   const response = await axios.get('http://localhost:9000/api/teams/all-members');
+  //   const response = await axios.get('http://13.60.227.51:9000/api/teams/all-members');
   //   return response.data.data;
   // };
 
   // const getAssignedChats = async (memberId: string) => {
-  //   const response = await axios.get(`http://localhost:9000/api/teams/team-members/${memberId}/assigned-chats`);
+  //   const response = await axios.get(`http://13.60.227.51:9000/api/teams/team-members/${memberId}/assigned-chats`);
   //   return response.data.data;
   // };
 
   // const addTeamMember = async (data: { fullName: string; email: string; department: string }) => {
-  //   const response = await axios.post('http://localhost:9000/api/teams/add-member', data);
+  //   const response = await axios.post('http://13.60.227.51:9000/api/teams/add-member', data);
   //   return response.data;
   // };
 
@@ -446,17 +446,17 @@ export const TeamManagement: React.FC = () => {
   const [newMember, setNewMember] = useState({ fullName: '', email: '', department: 'Customer Support' });
 
   const getAllTeamMembers = async () => {
-    const response = await axios.get('http://localhost:9000/api/teams/all-members');
+    const response = await axios.get('http://13.60.227.51:9000/api/teams/all-members');
     return response.data.data;
   };
 
   const getAssignedChats = async (memberId: string) => {
-    const response = await axios.get(`http://localhost:9000/api/teams/team-members/${memberId}/assigned-chats`);
+    const response = await axios.get(`http://13.60.227.51:9000/api/teams/team-members/${memberId}/assigned-chats`);
     return response.data.data;
   };
 
   const addTeamMember = async (data: { fullName: string; email: string; department: string }) => {
-    const response = await axios.post('http://localhost:9000/api/teams/add-member', data);
+    const response = await axios.post('http://13.60.227.51:9000/api/teams/add-member', data);
     return response.data;
   };
 

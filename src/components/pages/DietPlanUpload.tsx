@@ -182,12 +182,12 @@ const handleUpload = async (e: React.FormEvent) => {
     setUploadStatus('uploading');
     setUploadProgress(0);
 
-    const response = await axios.post('http://localhost:9000/api/dietplans/upload', formData, {
+    const response = await axios.post('http://13.60.227.51:9000/api/dietplans/upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
-      onUploadProgress: (progressEvent) => {
-        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setUploadProgress(percentCompleted);
-      }
+      // onUploadProgress: (progressEvent) => {
+      //   // const percentCompleted = Math.round((progressEvent.loaded * 100) progressEvent.total);
+      //   setUploadProgress(percentCompleted);
+      // }
     });
 
     if (response.status === 200) {
