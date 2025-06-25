@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Plus, Search, Trash2, File } from 'lucide-react';
 import { DietPlan } from '../../types';
 
+
+
 export const DietPlans: React.FC = () => {
   const [dietPlans, setDietPlans] = useState<DietPlan[]>([]);
   const [searchTerm, setSearchTerm] = useState('');

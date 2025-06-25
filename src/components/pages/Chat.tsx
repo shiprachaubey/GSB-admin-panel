@@ -545,7 +545,7 @@ const [pendingMessage, setPendingMessage] = useState('');
 
   useEffect(() => {
     axios
-      .get('http://13.60.227.51/:9000/api/chat/chats')
+      .get('https://api.gsbpathy.com//api/chat/chats')
       .then((res) => {
         setConversations(res.data.data || []);
       })
@@ -554,7 +554,7 @@ const [pendingMessage, setPendingMessage] = useState('');
 
   const handleSelectConversation = async (conversation: ChatConversation) => {
     try {
-      const res = await axios.get(`http://13.60.227.51:9000/api/chat/${conversation._id}`);
+      const res = await axios.get(`https://api.gsbpathy.com/api/chat/${conversation._id}`);
       setSelectedConversation(conversation);
       setMessages(res.data.messages || []);
     } catch (err) {
@@ -570,7 +570,7 @@ const handleSendMessage = async () => {
 
 
   try {
-    await axios.post(`http://13.60.227.51:9000/api/chat/${selectedConversation._id}/reply`, {
+    await axios.post(`https://api.gsbpathy.com/api/chat/${selectedConversation._id}/reply`, {
        text: newMessage,
     agentId: agentIdToSend, 
     });
@@ -593,7 +593,7 @@ const handleSendMessage = async () => {
 
 const handleAssignAgent = async () => {
   try {
-    await axios.put('http://13.60.227.51:9000/api/chat/chats/assign', {
+    await axios.put('https://api.gsbpathy.com/api/chat/chats/assign', {
       chatId: selectedConversation?._id,
       agentId: selectedAgent,
     });
