@@ -57,7 +57,7 @@ const handleUpload = async (e: React.FormEvent) => {
   try {
     setUploadStatus('uploading');
 
-    const response = await fetch('http://13.60.227.51:9000/api/videos/upload', {
+    const response = await fetch('https://api.gsbpathy.com/api/videos/upload', {
       method: 'POST',
       body: formData
     });

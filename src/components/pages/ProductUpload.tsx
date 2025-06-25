@@ -62,7 +62,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   formData.append('benefits', JSON.stringify(benefits));
 
   try {
-    const response = await fetch('http://13.60.227.51:9000/api/products/products', {
+    const response = await fetch('https://api.gsbpathy.com/api/products/products', {
       method: 'POST',
       body: formData,
     });

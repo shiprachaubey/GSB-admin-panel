@@ -42,7 +42,7 @@ export const VideoManagement: React.FC = () => {
  useEffect(() => {
   const fetchVideos = async () => {
     try {
-      const response = await fetch('http://13.60.227.51:9000/api/videos/all-videos');
+      const response = await fetch('https://api.gsbpathy.com/api/videos/all-videos');
       const result = await response.json();
       setVideos(result.videos); // ✅ this matches your actual response structure
     } catch (error) {
@@ -59,7 +59,7 @@ const handleDelete = async (id: string) => {
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`http://13.60.227.51:9000/api/videos/${id}`, {
+    const response = await fetch(`https://api.gsbpathy.com/api/videos/${id}`, {
       method: 'DELETE',
     });
 
