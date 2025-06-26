@@ -265,7 +265,7 @@ export const Products: React.FC = () => {
   // ✅ Fetch products from API
   const fetchProducts = async () => {
     try {
-      const res = await fetch('http://13.60.227.51:9000/api/products/products');
+      const res = await fetch('https://api.gsbpathy.com/api/products/products');
       const data = await res.json();
       setProducts(data.products || []);
     } catch (err) {
@@ -284,7 +284,7 @@ export const Products: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
     try {
-      const res = await fetch(`http://13.60.227.51:9000/api/products/products/${id}`, {
+      const res = await fetch(`https://api.gsbpathy.com/api/products/products/${id}`, {
         method: 'DELETE',
       });
 

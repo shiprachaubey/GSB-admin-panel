@@ -12,7 +12,7 @@ export const DietPlans: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('http://13.60.227.51:9000/api/dietplans/get-pdf')
+    fetch('https://api.gsbpathy.com/api/dietplans/get-pdf')
       .then(res => res.json())
       .then(data => setDietPlans(data.data))
       .catch(err => console.error('Failed to fetch diet plans:', err));
@@ -23,7 +23,7 @@ export const DietPlans: React.FC = () => {
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`http://13.60.227.51:9000/api/dietplans/${id}`, {
+      const response = await fetch(`https://api.gsbpathy.com/api/dietplans/${id}`, {
         method: 'DELETE'
       });
       const result = await response.json();

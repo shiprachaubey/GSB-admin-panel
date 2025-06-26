@@ -11,6 +11,8 @@ export const VideoUpload: React.FC = () => {
   const [access, setAccess] = useState<VideoAccess>('Free');
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+  const [youtubeLink, setYoutubeLink] = useState('');
+
   const [thumbnailPreview, setThumbnailPreview] = useState<string>('');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -53,6 +55,8 @@ const handleUpload = async (e: React.FormEvent) => {
   formData.append('accessLevel', access);
   formData.append('video', videoFile);
   formData.append('thumbnail', thumbnailFile);
+  formData.append('youtubeLink', youtubeLink);
+
 
   try {
     setUploadStatus('uploading');
@@ -94,6 +98,8 @@ const handleUpload = async (e: React.FormEvent) => {
     setThumbnailPreview('');
     setUploadStatus('idle');
     setUploadProgress(0);
+    setYoutubeLink('');
+
   };
 
   return (
@@ -257,7 +263,7 @@ const handleUpload = async (e: React.FormEvent) => {
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Video File <span className="text-red-500">*</span>
+                      Video File <span className="text-red-500"></span>
                     </label>
                     
                     <div className="border border-gray-300 rounded-lg p-4">
@@ -302,6 +308,21 @@ const handleUpload = async (e: React.FormEvent) => {
                     </div>
                   </div>
                 </div>
+
+                <div>
+  <label htmlFor="youtubeLink" className="block text-sm font-medium text-gray-700 mb-1">
+    YouTube Link <span className="text-gray-400 text-xs"></span>
+  </label>
+  <input
+    type="url"
+    id="youtubeLink"
+    value={youtubeLink}
+    onChange={(e) => setYoutubeLink(e.target.value)}
+    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
+    placeholder="https://www.youtube.com/watch?v=..."
+  />
+</div>
+
               </div>
             </div>
             

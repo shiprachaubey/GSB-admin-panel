@@ -31,7 +31,7 @@ export const Sidebar: React.FC = () => {
     >
       <div className="p-4 flex items-center justify-between">
         <div className={`flex items-center gap-2 ${collapsed ? 'justify-center w-full' : ''}`}>
-          <Sunrise className="text-amber-400" size={24} />
+          {/* <Sunrise className="text-amber-400" size={24} /> */}
           {!collapsed && <span className="text-xl font-semibold">GSB Pathy</span>}
         </div>
         <button 

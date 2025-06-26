@@ -443,17 +443,17 @@ const Consultancy: React.FC = () => {
   const [noteInput, setNoteInput] = useState('');
 
   useEffect(() => {
-    fetch('http://13.60.227.51:9000/api/consultancy/all')
+    fetch('https://api.gsbpathy.com/api/consultancy/all')
       .then(res => res.json())
       .then(data => setConsultancyRequests(data.data));
 
-    fetch('http://13.60.227.51:9000/api/teams/all-members')
+    fetch('https://api.gsbpathy.com/api/teams/all-members')
       .then(res => res.json())
       .then(data => setTeamMembers(data.data));
   }, []);
 
   const handleSelectRequest = async (id: string) => {
-    const res = await fetch(`http://13.60.227.51:9000/api/consultancy/${id}`);
+    const res = await fetch(`https://api.gsbpathy.com/api/consultancy/${id}`);
     const result = await res.json();
     setSelectedRequest(result.data);
   };
@@ -465,7 +465,7 @@ const Consultancy: React.FC = () => {
     if (selectedAssignee) payload.assignedTo = selectedAssignee;
     if (noteInput) payload.notes = noteInput;
 
-    const res = await fetch(`http://13.60.227.51:9000/api/consultancy/${selectedRequest._id}`, {
+    const res = await fetch(`https://api.gsbpathy.com/api/consultancy/${selectedRequest._id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -478,7 +478,7 @@ const Consultancy: React.FC = () => {
     setSelectedAssignee('');
 
     // Refresh list
-    const all = await fetch('http://13.60.227.51:9000/api/consultancy/all').then(r => r.json());
+    const all = await fetch('https://api.gsbpathy.com/api/consultancy/all').then(r => r.json());
     setConsultancyRequests(all.data);
   };
 
