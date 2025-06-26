@@ -19,6 +19,7 @@ import { Orders } from '../pages/Orders';
 import { Login } from '../pages/Login';
 import { TeamManagement } from '../pages/TeamManagement';
 import { Chat } from '../pages/Chat';
+import { Users } from '../pages/Users';
 
 export const Layout: React.FC = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -41,7 +42,7 @@ export const Layout: React.FC = () => {
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 md:p-6">
           <Routes>
             <Route path="/login" element={<Login />} />
-             <Route path="/" element={<VideoManagement />} />
+             <Route path="/" element={<Login />} />
             <Route path="/videos" element={<VideoManagement />} />
             <Route path="/videos/upload" element={<VideoUpload />} />
             <Route path="/videos/edit/:id" element={<VideoEdit />} />
@@ -53,6 +54,7 @@ export const Layout: React.FC = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/products/add" element={<ProductUpload />} />
             <Route path="/team" element={<TeamManagement />} />
+            <Route path="/users" element={<Users />} />
 <Route path="/chat" element={<Chat />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="*" element={<Navigate to="/" />} />

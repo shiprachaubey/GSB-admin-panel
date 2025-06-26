@@ -92,17 +92,23 @@ export const Sidebar: React.FC = () => {
           collapsed={collapsed}
         /> */}
         <NavLinkItem 
-  to="/team" 
-  icon={<Users size={20} />} 
-  label="Team" 
-  collapsed={collapsed}
-/>
-<NavLinkItem 
-  to="/chat" 
-  icon={<MessagesSquare size={20} />} 
-  label="Chat" 
-  collapsed={collapsed}
-/>
+          to="/users" 
+          icon={<Users size={20} />} 
+          label="Users" 
+          collapsed={collapsed} 
+        />
+        <NavLinkItem 
+          to="/team" 
+          icon={<Users size={20} />} 
+          label="Team" 
+          collapsed={collapsed}
+        />
+        <NavLinkItem 
+          to="/chat" 
+          icon={<MessagesSquare size={20} />} 
+          label="Chat" 
+          collapsed={collapsed}
+        />
       </nav>
     </aside>
   );
